@@ -2,11 +2,11 @@
   "name": "harborleaf",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "build": "tsc",
-    "start": "node ./dist/index.js", 
-    "dev": "nodemon ./src/index.ts"
-  },
+ "scripts": {
+  "postinstall": "npm run build",
+  "start": "node dist/index.js",
+  "dev": "nodemon src/index.ts"
+},
   "author": "",
   "license": "ISC",
   "description": "",
