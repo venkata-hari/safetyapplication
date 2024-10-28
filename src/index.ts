@@ -23,7 +23,7 @@ app.use((err:{status:number,message:string,stack:string}, req: Request, res: Res
 
 
 app.listen(PORT, () => {
-    const URL = process.env.MOGO_URL
+    const URL = process.env.MOGO_URL || 'mongodb+srv://venkat:1234@cluster0.srkzk.mongodb.net/harborleaf?retryWrites=true&w=majority&appName=Cluster0'
     if (!URL) {
         console.error('Database URL is not defined');
     }
