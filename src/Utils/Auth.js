@@ -1,9 +1,8 @@
-import express, { Request, Response, NextFunction } from 'express';
-import AuthSchema from '../Model/AuthSchema';
+import express from 'express';
+import AuthSchema from '../Model/AuthSchema.js';
 import bcrypt from 'bcrypt'
-import {Promise_Type} from './type'
 const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
-export const Auth = async (req: Request, res: Response, next: NextFunction):Promise_Type => {
+export const Auth = async (req, res, next) => {
     const { firstname, lastname, dataofbirth, gender, password, confirmPassword ,mobile} = req.body;
   
     if (!firstname || !lastname || !dataofbirth || !gender || !password || !confirmPassword || !mobile) {
@@ -22,7 +21,7 @@ export const Auth = async (req: Request, res: Response, next: NextFunction):Prom
     }
     next();
 };
-export const ChangePassword=async(req:Request,res:Response,next:NextFunction):Promise_Type=>{
+export const ChangePassword=async(req,res,next)=>{
     const {mobile,newPassword,confirmPassword}=req.body
     const exist=await AuthSchema.findOne({mobile})
     if(!exist){

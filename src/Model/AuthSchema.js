@@ -1,14 +1,4 @@
 import mongoose from "mongoose";
-
-export type Auth = {
-  firstname: string;
-  lastname: string;
-  mobile: string;
-  dataofbirth: string;
-  password: string;
-  confirmPassword: string;
-};
-
 const AuthSchema = new mongoose.Schema(
   {
     firstname: { type: String, required: true },
@@ -25,4 +15,4 @@ const AuthSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model<Auth>("Auth", AuthSchema);
+export default mongoose.model("Auth", AuthSchema);

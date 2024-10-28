@@ -1,1 +1,0 @@
-export type Promise_Type=Promise<void | any>

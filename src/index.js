@@ -1,7 +1,7 @@
-import express, { Request, Response, NextFunction } from 'express'
-import { Connect } from './MongoDb_Connection/Connect'
+import express from 'express'
+import { Connect } from './MongoDb_Connection/Connect.js'
 import dotenv from 'dotenv'
-import mainrouter from './Routes/Main'
+import mainrouter from './Routes/Main.js'
 import cors from 'cors'
 const app = express()
 dotenv.config()
@@ -12,7 +12,7 @@ app.use('/', mainrouter)
 app.use((req, res) => {
     res.status(404).json({ message: 'Page not found' })
 })
-app.use((err:{status:number,message:string,stack:string}, req: Request, res: Response, next: NextFunction) => {
+app.use((err, req, res, next) => {
     const errStatus = err.status || 500;
     const errMessage = err.message || 'Internal Server Error';
     res.status(errStatus).json({

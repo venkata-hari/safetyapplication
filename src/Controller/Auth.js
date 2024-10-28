@@ -1,9 +1,8 @@
-import express,{Request,Response,NextFunction} from 'express'
-import AuthSchema, { Auth } from '../Model/AuthSchema'
+import express from 'express'
+import AuthSchema from '../Model/AuthSchema.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import {Promise_Type} from '../Utils/type'
-export const SignUp=async(req:Request,res:Response,next:NextFunction):Promise_Type=>{
+export const SignUp=async(req,res,next)=>{
 try{
     const salt=await bcrypt.genSalt(10)
     const hash=await bcrypt.hash(req.body.password,salt)
@@ -15,7 +14,7 @@ catch(err){
     next(err)
 }
 }
-export const SignIn=async(req:Request,res:Response,next:NextFunction):Promise_Type=>{
+export const SignIn=async(req,res,next)=>{
 try{
     const {mobile,password}=req.body
     if(!mobile || !password){
@@ -29,7 +28,7 @@ try{
     if(!isPassword){
         return res.status(400).json({message:'Invalid Password'})
     }
-    const payload:any={
+    const payload={
         user:{
             id:exist._id,
             mobile:exist.mobile
@@ -42,7 +41,7 @@ catch(err){
     next(err)   
 }
 }
-export const ForgetPassword=async(req:Request,res:Response,next:NextFunction):Promise_Type=>{
+export const ForgetPassword=async(req,res,next)=>{
     try{
         const {mobile}=req.body
         const exist=await AuthSchema.findOne({mobile})
@@ -57,7 +56,7 @@ export const ForgetPassword=async(req:Request,res:Response,next:NextFunction):Pr
         next(err)
     }
 }
-export const ChangePassword=async(req:Request,res:Response,next:NextFunction):Promise_Type=>{
+export const ChangePassword=async(req,res,next)=>{
     try{ 
         const{mobile,newPassword}=req.body
         const salt=await bcrypt.genSalt(10)
@@ -69,10 +68,10 @@ export const ChangePassword=async(req:Request,res:Response,next:NextFunction):Pr
         next(err)
     }
 }
-export const VerifyOtp=async(req:Request,res:Response,next:NextFunction):Promise_Type=>{
+export const VerifyOtp=async(req,res,next)=>{
     try{ 
         const{mobile,otp}=req.body
-        const exist:Auth | any=await AuthSchema.findOne({mobile})
+        const exist=await AuthSchema.findOne({mobile})
         if(!exist){
             return res.status(400).json({message:'Invalid Mobile Number'})
         }
