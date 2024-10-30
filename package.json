@@ -2,15 +2,16 @@
   "name": "harborleaf",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "node ./src/index.js",
-    "dev": "nodemon ./src/index.js"
+    "start": "node ./src/index.ts",
+    "dev": "nodemon ./src/index.ts"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.8.4",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -18,7 +19,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.3",
     "nodemon": "^3.1.7",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

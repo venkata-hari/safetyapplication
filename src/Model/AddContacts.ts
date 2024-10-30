@@ -6,6 +6,7 @@ const AddContactsSchema = new mongoose.Schema({
       {
         firstname: { type: String, required: true },
         lastname: { type: String, required: true },
+        countryCode:{type:String,required:true},
         mobile: { type: String, unique: true, sparse: true } 
       }
     ]

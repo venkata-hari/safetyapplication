@@ -1,7 +1,7 @@
-import express from 'express'
-import { Connect } from './MongoDb_Connection/Connect.js'
+import express,{Request,Response,NextFunction} from 'express'
+import { Connect } from './MongoDb_Connection/Connect'
 import dotenv from 'dotenv'
-import mainrouter from './Routes/Main.js'
+import mainrouter from './Routes/Main'
 import cors from 'cors'
 const app = express()
 dotenv.config()
@@ -12,7 +12,7 @@ app.use('/', mainrouter)
 app.use((req, res) => {
     res.status(404).json({ message: 'Page not found' })
 })
-app.use((err, req, res, next) => {
+app.use((err:any, req:Request,res:Response,next:NextFunction) => {
     const errStatus = err.status || 500;
     const errMessage = err.message || 'Internal Server Error';
     res.status(errStatus).json({
@@ -25,7 +25,7 @@ app.use((err, req, res, next) => {
 
 
 app.listen(PORT, () => {
-    const URL = process.env.MOGO_URL || 'mongodb+srv://venkat:1234@cluster0.srkzk.mongodb.net/harborleaf?retryWrites=true&w=majority&appName=Cluster0'
+    const URL = process.env.MOGO_URL 
     if (!URL) {
         console.error('Database URL is not defined');
     }

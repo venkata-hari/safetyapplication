@@ -1,6 +1,7 @@
-import express from 'express'
-import AddContactsSchema from "../Model/AddContacts.js"
-export const createContacts = async (req,res,next) => {
+import express,{Request,Response,NextFunction} from 'express'
+import AddContactsSchema from "../Model/AddContacts"
+import {Promise_Type} from '../Utils/Types'
+export const createContacts = async (req:any,res:Response,next:NextFunction):Promise_Type => {
   try {
     const { contacts } = req.body
     for (const contact of contacts) {
@@ -27,7 +28,7 @@ export const createContacts = async (req,res,next) => {
 
 
 
-export const GetContacts=async(req,res,next)=>{
+export const GetContacts=async(req:Request,res:Response,next:NextFunction):Promise_Type=>{
     try{
       const data=await AddContactsSchema.find().populate('user','firstname lastname')
       return res.status(200).json({message:'Contacts are fetched Successfully',data})
