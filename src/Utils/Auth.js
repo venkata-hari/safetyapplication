@@ -1,6 +1,6 @@
 import express from 'express';
 import AuthSchema from '../Model/AuthSchema.js';
-import bcrypt from 'bcrypt'
+import AddContactsSchema from '../Model/AddContacts.js';
 const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
 export const Auth = async (req, res, next) => {
     const { firstname, lastname, dataofbirth, gender, password, confirmPassword ,mobile} = req.body;
@@ -21,6 +21,18 @@ export const Auth = async (req, res, next) => {
     }
     next();
 };
+export const AddContacts=async(req,res,next)=>{
+    const { firstname, lastname,mobile} = req.body;
+  
+    if (!firstname || !lastname || !mobile) {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
+    const existingUser = await AddContactsSchema.findOne({ mobile });
+    if (existingUser) {
+        return res.status(400).json({ message: 'Mobile number already exists. Please Add new One.' });
+    }
+    next()
+}
 export const ChangePassword=async(req,res,next)=>{
     const {mobile,newPassword,confirmPassword}=req.body
     const exist=await AuthSchema.findOne({mobile})

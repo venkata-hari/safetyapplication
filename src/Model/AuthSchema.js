@@ -9,8 +9,6 @@ const AuthSchema = new mongoose.Schema(
     password: { type: String, required: true },
     confirmPassword: { type: String, required: true },
     otp: { type: String },
-    lat: { type: String },
-    lng: { type: String },
   },
   { timestamps: true }
 );

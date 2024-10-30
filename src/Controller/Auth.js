@@ -7,7 +7,7 @@ try{
     const salt=await bcrypt.genSalt(10)
     const hash=await bcrypt.hash(req.body.password,salt)
     const OTP=Math.floor(Math.random()*5000)
-    const data=await AuthSchema.create({...req.body,password:hash,otp:OTP})
+    const data=await AuthSchema.create({...req.body,password:hash,confirmPassword:hash,otp:OTP})
     return res.status(200).json({message:'Signup Successfully',data})
 }
 catch(err){
