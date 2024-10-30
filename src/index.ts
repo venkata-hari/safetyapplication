@@ -5,7 +5,7 @@ import mainrouter from './Routes/Main'
 import cors from 'cors'
 const app = express()
 dotenv.config()
-const PORT = process.env.PORT || 80
+const PORT = process.env.PORT || 3000
 app.use(cors())
 app.use(express.json())
 app.use('/', mainrouter)
